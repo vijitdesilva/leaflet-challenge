@@ -14,3 +14,18 @@ var myMap = L.map("map", {
     accessToken: API_KEY
   }).addTo(myMap);
   
+
+// Store API query variables
+var baseURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php";
+var title = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
+var status = "200";
+var api ="1.10.3"
+var count = "2046";
+
+// Assemble API query URL
+var url = baseURL + title + status + api + count;
+
+// Grab the data with d3
+d3.json(url).then(function(response) {
+
+
