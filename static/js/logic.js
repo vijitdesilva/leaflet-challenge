@@ -79,7 +79,7 @@ d3.json(URL, function (data) {
   /* Adding on the legend based off the color scheme we have */
   legend.onAdd = function (color) {
       var div = L.DomUtil.create('div', 'info legend');
-      var levels = ['-10 -10', '1-2', '2-3', '3-4', '4-5', '5+'];
+      var levels = ['-10 -10', '10-30', '30-50', '50-70', '70-90', '90+'];
       var colors = ['#3c0', '#9f6', '#fc3', '#f93', '#c60', '#c00']
       for (var i = 0; i < levels.length; i++) {
           div.innerHTML += '<i style="background:' + colors[i] + '"></i>' + levels[i] + '<br>';
