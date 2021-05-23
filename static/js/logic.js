@@ -31,29 +31,28 @@ d3.json(URL, function (data) {
       level6: "#c00"
   }
 
-  /* For each of the earthquakes, we are now identifying the lat/long and assessing a severity color to the earthquake */
+  // Loop through url data 
 
   for (var i = 0; i < earthquakes.length; i++) {
       let latitude = earthquakes[i].geometry.coordinates[1];
       let longitude = earthquakes[i].geometry.coordinates[0];
       let magnitude = earthquakes[i].properties.mag;
       var fillColor;
-      if (magnitude > 90) {
+      if (magnitude > 5) {
           fillColor = color.level6;
-      } else if (magnitude > 70) {
+      } else if (magnitude > 4) {
           fillColor = color.level5;
-      } else if (magnitude > 50) {
+      } else if (magnitude > 3) {
           fillColor = color.level4;
-      } else if (magnitude > 30) {
+      } else if (magnitude > 2) {
           fillColor = color.level3;
-      } else if (magnitude > 10) {
+      } else if (magnitude > 1) {
           fillColor = color.level2;
       } else {
           fillColor = color.level1;
       }
 
-      /* The radius of each circle will be determined on an exponential scale based on the size of the magnitude.
-       I chose to use exponential so that larger earthquakes will have a much higher radius than smaller earthquakes */
+//
       var epicenter = L.circleMarker([latitude, longitude], {
           radius: magnitude ** 2,
           color: "black",
@@ -64,19 +63,19 @@ d3.json(URL, function (data) {
       epicenter.addTo(myMap);
 
 
-      /* Set up labels as a pop-up when we use the mouse to point to one of the circles */
+      // set Pop up labels
 
       epicenter.bindPopup("<h3> " + new Date(earthquakes[i].properties.time) + "</h3><h4>Magnitude: " + magnitude +
           "<br>Location: " + earthquakes[i].properties.place + "</h4><br>");
 
   }
 
-  /* Setting the legend to appear in the bottom right of our chart */
+  // set legend position
   var legend = L.control({
       position: 'bottomright'
   });
 
-  /* Adding on the legend based off the color scheme we have */
+  // add legend 
   legend.onAdd = function (color) {
       var div = L.DomUtil.create('div', 'info legend');
       var levels = ['-10 -10', '10-30', '30-50', '50-70', '70-90', '90+'];
