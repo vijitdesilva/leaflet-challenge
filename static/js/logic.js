@@ -36,17 +36,18 @@ d3.json(URL, function (data) {
   for (var i = 0; i < earthquakes.length; i++) {
       let latitude = earthquakes[i].geometry.coordinates[1];
       let longitude = earthquakes[i].geometry.coordinates[0];
+      let depth = earthquakes[i].geometry.coordinates[2];
       let magnitude = earthquakes[i].properties.mag;
       var fillColor;
-      if (magnitude > 5) {
+      if (magnitude > 90) {
           fillColor = color.level6;
-      } else if (magnitude > 4) {
+      } else if (magnitude*depth > 70) {
           fillColor = color.level5;
-      } else if (magnitude > 3) {
+      } else if (magnitude*depth  > 50) {
           fillColor = color.level4;
-      } else if (magnitude > 2) {
+      } else if (magnitude*depth  > 30) {
           fillColor = color.level3;
-      } else if (magnitude > 1) {
+      } else if (magnitude*depth  > 10) {
           fillColor = color.level2;
       } else {
           fillColor = color.level1;
