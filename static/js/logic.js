@@ -13,16 +13,15 @@ const streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{
 }).addTo(myMap);
 
 
-/* This allows us to call in the URL for earthquakes in the past seven days and set it to the global variable URL.  If we want to change the dimensions of the data
-that we are pulling in, this would be the place to change that */
+// Set the URL to get data 
 //   https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson
 var URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
 
-/* Bringing in the dataset and then placing markers with appropriate size and color related to the magnitude of the quake */
+// get data 
 d3.json(URL, function (data) {
   let earthquakes = data.features;
   //    console.log(earthquakes);
-  /*Sets up our color scheme for earthquakes */
+  // apply color scheme
   let color = {
       level1: "#3c0",
       level2: "#9f6",
@@ -39,15 +38,15 @@ d3.json(URL, function (data) {
       let longitude = earthquakes[i].geometry.coordinates[0];
       let magnitude = earthquakes[i].properties.mag;
       var fillColor;
-      if (magnitude > 5) {
+      if (magnitude > 90) {
           fillColor = color.level6;
-      } else if (magnitude > 4) {
+      } else if (magnitude > 70) {
           fillColor = color.level5;
-      } else if (magnitude > 3) {
+      } else if (magnitude > 50) {
           fillColor = color.level4;
-      } else if (magnitude > 2) {
+      } else if (magnitude > 30) {
           fillColor = color.level3;
-      } else if (magnitude > 1) {
+      } else if (magnitude > 10) {
           fillColor = color.level2;
       } else {
           fillColor = color.level1;
@@ -80,7 +79,7 @@ d3.json(URL, function (data) {
   /* Adding on the legend based off the color scheme we have */
   legend.onAdd = function (color) {
       var div = L.DomUtil.create('div', 'info legend');
-      var levels = ['>1', '1-2', '2-3', '3-4', '4-5', '5+'];
+      var levels = ['-10 -10', '1-2', '2-3', '3-4', '4-5', '5+'];
       var colors = ['#3c0', '#9f6', '#fc3', '#f93', '#c60', '#c00']
       for (var i = 0; i < levels.length; i++) {
           div.innerHTML += '<i style="background:' + colors[i] + '"></i>' + levels[i] + '<br>';
