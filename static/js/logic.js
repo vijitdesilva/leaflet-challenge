@@ -66,7 +66,8 @@ d3.json(URL, function (data) {
 
       // set Pop up labels
 
-      epicenter.bindPopup("<h3> " + new Date(earthquakes[i].properties.time) + "</h3><h4>Magnitude: " + magnitude +
+      epicenter.bindPopup("<h3> " + new Date(earthquakes[i].properties.time) + "</h3><h4>Magnitude: " + magnitude + 
+      "<br>Depth: " + depth +
           "<br>Location: " + earthquakes[i].properties.place + "</h4><br>");
 
   }
