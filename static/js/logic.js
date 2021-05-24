@@ -39,7 +39,7 @@ d3.json(URL, function (data) {
       let depth = earthquakes[i].geometry.coordinates[2];
       let magnitude = earthquakes[i].properties.mag;
       var fillColor;
-      if (magnitude > 90) {
+      if (magnitude*depth > 90) {
           fillColor = color.level6;
       } else if (magnitude*depth > 70) {
           fillColor = color.level5;
@@ -78,7 +78,7 @@ d3.json(URL, function (data) {
   });
 
   // add legend 
-  legend.onAdd = function (color) {
+  legend.onAdd = function () {
       var div = L.DomUtil.create('div', 'info legend');
       var levels = ['-10 -10', '10-30', '30-50', '50-70', '70-90', '90+'];
       var colors = ['#3c0', '#9f6', '#fc3', '#f93', '#c60', '#c00']
